@@ -26,15 +26,15 @@ func main() {
 		os.Exit(0)
 	}
 
+	if *configPath == "" {
+		flag.PrintDefaults()
+		os.Exit(1)
+	}
+
 	if *verbose {
 		fmt.Println("Using command line flags:")
 		fmt.Println("  config:", *configPath)
 		fmt.Println("  verbose", *verbose)
-	}
-
-	if *configPath == "" {
-		fmt.Println("Must specify config file")
-		os.Exit(1)
 	}
 
 	parsedConfig, err := config.ParseFile(*configPath)
