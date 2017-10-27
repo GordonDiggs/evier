@@ -3,6 +3,7 @@ package config
 import (
 	"errors"
 	"gopkg.in/yaml.v2"
+	"io/ioutil"
 )
 
 type Job struct {
@@ -25,6 +26,14 @@ type Config struct {
 		Rsh    string `yaml:",omitempty"`
 		Delete bool
 	}
+}
+
+func ParseFile(path string) (c Config, e error) {
+	content, err := ioutil.ReadFile(path)
+	if err != nil {
+		return Config{}, err
+	}
+	return Parse(content)
 }
 
 func Parse(source []byte) (c Config, err error) {
