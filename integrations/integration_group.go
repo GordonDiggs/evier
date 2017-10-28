@@ -6,11 +6,12 @@ import (
 )
 
 type IntegrationGroup struct {
-	Integrations []Integration
+	Configs []Config
 }
 
 func (ig IntegrationGroup) NotifyProcessStart(startTime time.Time) (e error) {
-	for _, intg := range ig.Integrations {
+	for _, cfg := range ig.Configs {
+		intg := IntegrationMap[cfg.Type]
 		e = intg.NotifyProcessStart(startTime)
 		if e != nil {
 			return e
@@ -20,7 +21,8 @@ func (ig IntegrationGroup) NotifyProcessStart(startTime time.Time) (e error) {
 }
 
 func (ig IntegrationGroup) NotifyJobStart(job job.Job, startTime time.Time) (e error) {
-	for _, intg := range ig.Integrations {
+	for _, cfg := range ig.Configs {
+		intg := IntegrationMap[cfg.Type]
 		e = intg.NotifyJobStart(job, startTime)
 		if e != nil {
 			return e
@@ -30,7 +32,8 @@ func (ig IntegrationGroup) NotifyJobStart(job job.Job, startTime time.Time) (e e
 }
 
 func (ig IntegrationGroup) NotifyJobSuccess(job job.Job, startTime time.Time, endTime time.Time) (e error) {
-	for _, intg := range ig.Integrations {
+	for _, cfg := range ig.Configs {
+		intg := IntegrationMap[cfg.Type]
 		e = intg.NotifyJobSuccess(job, startTime, endTime)
 		if e != nil {
 			return e
@@ -40,7 +43,8 @@ func (ig IntegrationGroup) NotifyJobSuccess(job job.Job, startTime time.Time, en
 }
 
 func (ig IntegrationGroup) NotifyJobFailure(job job.Job, startTime time.Time, endTime time.Time) (e error) {
-	for _, intg := range ig.Integrations {
+	for _, cfg := range ig.Configs {
+		intg := IntegrationMap[cfg.Type]
 		e = intg.NotifyJobFailure(job, startTime, endTime)
 		if e != nil {
 			return e
@@ -50,7 +54,8 @@ func (ig IntegrationGroup) NotifyJobFailure(job job.Job, startTime time.Time, en
 }
 
 func (ig IntegrationGroup) NotifyProcessSuccess(startTime time.Time, endTime time.Time) (e error) {
-	for _, intg := range ig.Integrations {
+	for _, cfg := range ig.Configs {
+		intg := IntegrationMap[cfg.Type]
 		e = intg.NotifyProcessSuccess(startTime, endTime)
 		if e != nil {
 			return e

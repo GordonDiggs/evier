@@ -10,9 +10,9 @@ import (
 )
 
 type Config struct {
-	Slack integrations.Slack
-	Jobs  []job.Job
-	Rsync rsync.Options
+	Integrations []integrations.Config
+	Jobs         []job.Job
+	Rsync        rsync.Options
 }
 
 func ParseFile(path string) (c Config, e error) {

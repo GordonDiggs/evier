@@ -13,8 +13,7 @@ func Run(cfg config.Config) (e error) {
 	startTime := time.Now()
 	intgs.NotifyProcessStart(startTime)
 
-	jobCount := len(cfg.Jobs)
-	for i, job := range cfg.Jobs {
+	for _, job := range cfg.Jobs {
 		jobStart := time.Now()
 
 		e = intgs.NotifyJobStart(job, jobStart)

@@ -1,6 +1,7 @@
 integrations:
-  slack:
-    url: "https://..."
+  - type: "slack"
+    options:
+      url: "https://..."
 rsync:
   user: zaphod
   host: deep-thought.local

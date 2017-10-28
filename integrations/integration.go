@@ -16,3 +16,7 @@ type Integration interface {
 
 	NotifyProcessSuccess(startTime time.Time, endTime time.Time) (e error)
 }
+
+var IntegrationMap = map[string]Integration{
+	"slack": &Slack{},
+}
