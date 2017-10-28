@@ -2,30 +2,17 @@ package config
 
 import (
 	"errors"
+	"evier/integrations"
+	"evier/job"
+	"evier/rsync"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 )
 
-type Job struct {
-	Name        string
-	Source      string
-	Destination string
-}
-
 type Config struct {
-	Integrations struct {
-		Slack struct {
-			Url string
-		}
-	}
-	Jobs  []Job
-	Rsync struct {
-		User   string `yaml:",omitempty"`
-		Host   string `yaml:",omitempty"`
-		Path   string `yaml:",omitempty"`
-		Rsh    string `yaml:",omitempty"`
-		Delete bool
-	}
+	Slack integrations.Slack
+	Jobs  []job.Job
+	Rsync rsync.Options
 }
 
 func ParseFile(path string) (c Config, e error) {

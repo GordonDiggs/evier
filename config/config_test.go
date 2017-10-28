@@ -4,11 +4,10 @@ import "testing"
 
 func TestIntegrations(t *testing.T) {
 	slack_url := "https://slack.com/webhooks"
-	source := []byte(`integrations:
-  slack:
-    url: ` + slack_url)
+	source := []byte(`slack:
+  url: ` + slack_url)
 	config, _ := Parse(source)
-	if config.Integrations.Slack.Url != slack_url {
+	if config.Slack.Url != slack_url {
 		t.Error("Could not parse Slack URL")
 	}
 }

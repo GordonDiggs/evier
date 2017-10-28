@@ -2,6 +2,7 @@ package main
 
 import (
 	"evier/config"
+	"evier/runner"
 	"evier/version"
 	"flag"
 	"fmt"
@@ -40,5 +41,6 @@ func main() {
 	parsedConfig, err := config.ParseFile(*configPath)
 	check(err)
 
-	fmt.Println(parsedConfig.Rsync.User)
+	err = runner.Run(parsedConfig)
+	check(err)
 }
